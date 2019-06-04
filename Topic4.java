@@ -58,9 +58,15 @@ public class Topic4{
     public Topic4(int size){
         myarray = new int[size];
     }
+    /**
+     插入数据，返回值为空
+     */
     public void insertnum(int innum){
         myarray[cnt++] = innum;
     }
+    /**
+     删除数据，返回索引
+    */
     public int deleteByNum(int delnum){
         int deleteResult;
         int i;
