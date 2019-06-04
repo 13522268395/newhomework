@@ -1,5 +1,5 @@
 package homework;
-
+import java.util.Scanner;
 /**
  * 作业3: 实现一个计算器
  *
@@ -25,6 +25,42 @@ package homework;
  *
  * @author haoc
  */
-public class Topic3 {
-
+public class Topic3{
+    public  boolean isNum(String str){
+        for(int i = str.length(); --i>=0 ;){
+            if(!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+    public String calResult(int str,int str1,String ope){
+        String result=null;
+        switch(ope){
+            case "+":
+                result =  String.valueOf(str+str1);
+                break;
+            case "*":
+                result = String.valueOf(str*str1);
+                break;
+            default:
+                System.out.println("操作符错误");
+        }return result;
+    }
+    public static void main(String[] args) {
+        Scanner data = new Scanner(System.in);
+        System.out.println("请输入第一个数据:");
+        String num1 = data.next();
+        System.out.println("请输入操作符");
+        String ope = data.next();
+        System.out.println("请输入第二个数据:");
+        String num2 = data.next();
+        Topic3 gc = new Topic3();
+        if(gc.isNum(num1)&&gc.isNum(num2)){
+            String result = gc.calResult(Integer.valueOf(num1),Integer.valueOf(num2),ope);
+            System.out.println(result);
+        }else{
+            System.out.println(num1+ope+num2);
+        }
+    }
 }
