@@ -20,5 +20,43 @@ package homework;
  * @author haoc
  */
 public class Topic7 {
+    /**
+     *定义一个人类，定义一个画的方法
+     */
+    class Person {
+        String job;
+        String name;
+        int age;
+        void drawing(){
+            System.out.println("画画");
+        }
+        void doTitle(){
+            System.out.println("做题");
+        }
+    }
+    /**
+     * 定义一个图形类
+     */
+    class Grap{
+        String shape;
+        double radius;
+        void formPattern(){
+            System.out.println("有各种图形构成的一种图案");
+        }
+    }
+    /**
+     * 定义一个物品类（在哪里画）
+     */
+    class Item{
+        double length;
+        double width;
+        String components;
+        void bePaint(){
+            System.out.println("被画上了画");
+        }
+        void beDoTitle(){
+            System.out.println("被做上了题");
+        }
+    }
 
 }
