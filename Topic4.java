@@ -1,6 +1,7 @@
 package homework;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -43,76 +44,123 @@ import java.util.Arrays;
 //        System.out.println(t4.arr1(arr,10));
 //    }
 //}
+//public class Topic4{
+//    private int[] myarray;
+//    /**
+//     自定义数组类的元素个数
+//     */
+//    private int cnt;
+//    /**
+//     使用自定义类封装数组，添加类方法实现数据操作
+//     */
+//    public Topic4(){
+//        myarray = new int[50];
+//    }
+//    public Topic4(int size){
+//        myarray = new int[size];
+//    }
+//    /**
+//     插入数据，返回值为空
+//     */
+//    public void insertnum(int innum){
+//        myarray[cnt++] = innum;
+//    }
+//    /**
+//     删除数据，返回索引
+//    */
+//    public int deleteByNum(int delnum){
+//        int deleteResult;
+//        int i;
+//        for(i = 0; i<cnt;i++){
+//            if(myarray[i] == delnum){
+//                int j;
+//                for(j = i;j < cnt-1;++j){
+//                    myarray[j] = myarray[j+1];
+//                }
+//                myarray[j] = myarray[--cnt];
+//                break;
+//            }
+//        }
+//        if (cnt ==i){
+//            deleteResult = -1;
+//        }else {
+//            deleteResult = i;
+//        }
+//        return deleteResult;
+//    }
+//    /**
+//     *按值查找数据，返回索引值
+//     *算法：线性查找
+//     */
+//    public int searchNum(int targetNum){
+//        int i;
+//        int searchResult;
+//        for(i=0;i<cnt;++i){
+//            if (targetNum==myarray[i]){
+//                break;
+//            }
+//        }
+//        if (i == cnt){
+//            searchResult = -1;
+//        }else {
+//            searchResult = i;
+//        }
+//        return searchResult;
+//    }
+//    public static void main(String[] args) {
+//        Topic4 t4 = new Topic4();
+//        t4.myarray = new int[]{1,3,5,7,9};
+//        int cnt = 5;
+//        System.out.println(Arrays.toString(t4.myarray));
+//        t4.insertnum(10);
+//        System.out.println(t4.myarray[5]);
+//
+//    }
+//}
+//public class Topic4{
+////    private static final Object[] EMPTY_ELEMENTDATA = {};
+////    transient Object[] elementData;
+////    public Topic4(int initialCapacity){
+////        if (initialCapacity >0){
+////            this.elementData = new Object[initialCapacity];
+////        }else if (initialCapacity == 0){
+////            this.elementData = EMPTY_ELEMENTDATA;
+////        }else {
+////            throw new IllegalArgumentException("Illegal Capacity" + initialCapacity);
+////        }
+////    }
+////}
 public class Topic4{
-    private int[] myarray;
-    /**
-     自定义数组类的元素个数
-     */
-    private int cnt;
-    /**
-     使用自定义类封装数组，添加类方法实现数据操作
-     */
-    public Topic4(){
-        myarray = new int[50];
-    }
-    public Topic4(int size){
-        myarray = new int[size];
-    }
-    /**
-     插入数据，返回值为空
-     */
-    public void insertnum(int innum){
-        myarray[cnt++] = innum;
-    }
-    /**
-     删除数据，返回索引
-    */
-    public int deleteByNum(int delnum){
-        int deleteResult;
-        int i;
-        for(i = 0; i<cnt;i++){
-            if(myarray[i] == delnum){
-                int j;
-                for(j = i;j < cnt-1;++j){
-                    myarray[j] = myarray[j+1];
-                }
-                myarray[j] = myarray[--cnt];
-                break;
-            }
-        }
-        if (cnt ==i){
-            deleteResult = -1;
+    private static final int[] EMPTY_ELEMENTDATA = {};
+    transient int[] elementData;
+    private int size;
+    public Topic4(int initialCapacity){
+        if (initialCapacity > 0){
+            this.elementData = new int[initialCapacity];
+        } else if (initialCapacity == 0) {
+            this.elementData = EMPTY_ELEMENTDATA;
         }else {
-            deleteResult = i;
+            throw new IllegalArgumentException("Illegal Capacity" + initialCapacity);
         }
-        return deleteResult;
     }
-    /**
-     *按值查找数据，返回索引值
-     *算法：线性查找
-     */
-    public int searchNum(int targetNum){
-        int i;
-        int searchResult;
-        for(i=0;i<cnt;++i){
-            if (targetNum==myarray[i]){
-                break;
-            }
+    public boolean add(int i){
+        ensureCapacity(size + 1);
+        elementData[size++] = i;
+        return true;
+    }
+    public void ensureCapacity(int minCapacity){
+        int oldCapacity = elementData.length;
+        if(minCapacity>oldCapacity){
+             int[] aint = elementData;
+             int newCapacity = (oldCapacity*3)/2 + 1;
+             if (newCapacity < minCapacity){
+                 newCapacity = minCapacity;
+                 elementData = Arrays.copyOf(elementData,newCapacity);
+             }
         }
-        if (i == cnt){
-            searchResult = -1;
-        }else {
-            searchResult = i;
-        }
-        return searchResult;
     }
     public static void main(String[] args) {
-        Topic4 t4 = new Topic4();
-        t4.myarray = new int[]{1,3,5,7,9};
-        int cnt = 5;
-        System.out.println(Arrays.toString(t4.myarray));
-        t4.insertnum(10);
-        System.out.println(t4.myarray[5]);
-
+        Topic4 tp4 = new Topic4(5);
+        tp4.add(5);
     }
 }

@@ -1,4 +1,6 @@
 package homework;
+import org.junit.Test;
+
 import java.util.Scanner;
 /**
  * 作业3: 实现一个计算器
