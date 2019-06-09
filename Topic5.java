@@ -37,10 +37,31 @@ package homework;
 //        t5.triangle(row);
 //    }
 //}
-public class Topic5 {
-    public static void main(String args[]) {
-        final int NMAX = 10;
-
+//public class Topic5 {
+//    public static void main(String args[]) {
+//        final int NMAX = 10;
+//
+//        int[][] odds = new int[NMAX][];
+//        for (int k = 0; k < odds.length; k++) {
+//            odds[k] = new int[k+1];
+//        }
+//
+//        for (int i = 0; i < odds.length; i++) {
+//            System.out.printf("%" + (odds.length - i)*2 + "s", "");
+//            for (int j = 0; j < i + 1; j++) {
+//                if (j==0||j==i) {
+//                    odds[i][j] = 1;
+//                }else {
+//                    odds[i][j] = odds[i-1][j-1] + odds[i-1][j];
+//                }
+//                System.out.printf("%4d", odds[i][j]);
+//            }
+//            System.out.println();
+//        }
+//    }
+//}
+public class Topic5{
+    public static void triangle(int NMAX){
         int[][] odds = new int[NMAX][];
         for (int k = 0; k < odds.length; k++) {
             odds[k] = new int[k+1];
@@ -49,14 +70,20 @@ public class Topic5 {
         for (int i = 0; i < odds.length; i++) {
             System.out.printf("%" + (odds.length - i)*2 + "s", "");
             for (int j = 0; j < i + 1; j++) {
+                //首尾都是1
                 if (j==0||j==i) {
                     odds[i][j] = 1;
                 }else {
+                    //当前元素等于上一行当前元素和上一行当前元素前一个元素之和
                     odds[i][j] = odds[i-1][j-1] + odds[i-1][j];
                 }
                 System.out.printf("%4d", odds[i][j]);
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        Topic5.triangle(5);
     }
 }

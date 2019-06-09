@@ -1,5 +1,5 @@
 package homework;
-import org.junit.Test;
+
 
 import java.util.Scanner;
 /**
@@ -28,7 +28,7 @@ import java.util.Scanner;
  * @author haoc
  */
 public class Topic3{
-    public  boolean isNum(String str){
+    public static boolean isNum(String str){
         for(int i = str.length(); --i>=0 ;){
             if(!Character.isDigit(str.charAt(i))){
                 return false;
@@ -36,14 +36,23 @@ public class Topic3{
         }
         return true;
     }
-    public String calResult(int str,int str1,String ope){
+    public static String calResult(int str,int str1,String ope){
         String result=null;
         switch(ope){
             case "+":
                 result =  String.valueOf(str+str1);
                 break;
+            case "-":
+                result = String.valueOf(str-str1);
+                break;
             case "*":
                 result = String.valueOf(str*str1);
+                break;
+            case "/":
+                result = String.valueOf(str/str1);
+                break;
+            case "%":
+                result = String.valueOf(str%str1);
                 break;
             default:
                 System.out.println("操作符错误");
@@ -57,10 +66,10 @@ public class Topic3{
         String ope = data.next();
         System.out.println("请输入第二个数据:");
         String num2 = data.next();
-        Topic3 gc = new Topic3();
-        if(gc.isNum(num1)&&gc.isNum(num2)){
-            String result = gc.calResult(Integer.valueOf(num1),Integer.valueOf(num2),ope);
-            System.out.println(result);
+//        Topic3 gc = new Topic3();
+        if(Topic3.isNum(num1)&&Topic3.isNum(num2)){
+            String result = Topic3.calResult(Integer.valueOf(num1),Integer.valueOf(num2),ope);
+            System.out.println(num1+" "+ope+" "+num2+" = "+result);
         }else{
             System.out.println(num1+ope+num2);
         }

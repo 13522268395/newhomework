@@ -114,7 +114,7 @@ public class Topic6{
      */
     private int length;
     /**
-     *定义一个整型数据
+     *定义一个整型数组
      */
     private int[] array;
     /**
@@ -124,6 +124,7 @@ public class Topic6{
     //初始化
     public Topic6(int length){
         this.length = length;
+        //默认为-1，空栈
         point = -1;
         array = new int[length];
     }
@@ -164,5 +165,8 @@ public class Topic6{
         for (int e: array){
             System.out.println(e);
         }
+    }
+    public int getLength(){
+        return this.length;
     }
 }

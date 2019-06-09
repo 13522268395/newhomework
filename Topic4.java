@@ -3,6 +3,8 @@ package homework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 作业4: 封装一个数组对象(暂时用int型即可)
@@ -131,9 +133,19 @@ import java.util.Arrays;
 ////    }
 ////}
 public class Topic4{
+    /**
+     * 定义一个初始化为空的整型数据
+     */
     private static final int[] EMPTY_ELEMENTDATA = {};
+    /**
+    * transient在采用Java默认的序列化机制的时候，被该关键字修饰的属性不会被序列化。
+    */
     transient int[] elementData;
+    /**
+     * elementData中已存放的元素的个数，注意：不是elementData的容量
+     */
     private int size;
+    //自带数组长度的构造方式
     public Topic4(int initialCapacity){
         if (initialCapacity > 0){
             this.elementData = new int[initialCapacity];
@@ -143,24 +155,113 @@ public class Topic4{
             throw new IllegalArgumentException("Illegal Capacity" + initialCapacity);
         }
     }
+    /**
+     * 向elementData中添加元素
+     * ensureCapacity 确保对象数组有足够的容量，可以将新元素加进去
+     * 加入新元素i，size加1
+     */
     public boolean add(int i){
         ensureCapacity(size + 1);
         elementData[size++] = i;
         return true;
     }
+    /**
+     * 确保数组的容量足够存放新加入的元素，若不够，要扩容
+     *
+     */
     public void ensureCapacity(int minCapacity){
+        //获取数组大小
         int oldCapacity = elementData.length;
         if(minCapacity>oldCapacity){
              int[] aint = elementData;
+             //新容量为旧容量的1.5倍+1
              int newCapacity = (oldCapacity*3)/2 + 1;
+             //扩容后的新容量还是没有传入的所需的最小容量大或等于
              if (newCapacity < minCapacity){
+                 //新容量设为最小容量
                  newCapacity = minCapacity;
+                 //复制新容量
                  elementData = Arrays.copyOf(elementData,newCapacity);
              }
         }
     }
+    /**
+     * 删除指定索引index下的元素，返回被删除的元素
+     */
+    public int remove(int index){
+        //检查索引范围
+        RangeCheck(index);
+        //被删除的元素
+        int oldValue = elementData[index];
+        fastRemove(index);
+        return oldValue;
+    }
+    /**
+     *检查索引index是否超出size-1
+     */
+    private void RangeCheck(int index){
+        if (index>=size){
+            throw new IndexOutOfBoundsException("Index:"+index+",Size:"+size);
+        }
+    }
+    /**
+     *删除单个位置的元素，是ArrayList的私有方法
+     */
+    private void fastRemove(int index){
+        int numMoved = size - index - 1;
+        if (numMoved>0){
+            //删除的元素到最后的元素整块前移
+            System.arraycopy(elementData, index+1,elementData,index,numMoved);
+            //把最后一个元素设为null
+        }
+    }
+    /**
+     * 判断动态数组是否包含元素，并返回第一个出现的索引位置，最后一个出现的索引
+     */
+    public boolean contains(int target){
+        return indexOf(target) >= 0;
+    }
+    /**
+     * 返回第一个出现的元素的索引位置
+     */
+    public int indexOf(int target){
+        for (int i = 0;i<size;i++){
+            if (target == elementData[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    /**
+     * 返回最后一个出现的元素o的索引位置    https://www.cnblogs.com/java-zhao/p/5102342.html
+     */
+    /**
+     * 遍历ArrayList中的对象
+     */
+//    ArrayList list = new ArrayList();
+//    for(Object obj:list){
+//        System.out.println(obj);
+//    }
+//    void catList(List<Integer> list){
+//        List<Integer> list1 = new ArrayList<>();
+//        for(int i=0;i<5;i++){
+//            list1.add(i);
+//        }
+//        Iterator<Integer> iterator = list1.iterator();
+//        while (iterator.hasNext()){
+//            int i = (int) iterator.next();
+//            System.out.println(i+", ");
+//        }
+//        System.out.println("\n" + list1);
+//    }
     public static void main(String[] args) {
         Topic4 tp4 = new Topic4(5);
         tp4.add(5);
+        tp4.add(1);
+        tp4.add(2);
+        tp4.add(3);
+        tp4.add(4);
+        tp4.remove(4);
+        tp4.contains(5);
     }
 }
